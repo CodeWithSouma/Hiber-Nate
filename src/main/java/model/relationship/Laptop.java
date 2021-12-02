@@ -2,24 +2,27 @@ package model.relationship;
 
 import javax.persistence.Entity;
 import javax.persistence.Id;
+import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
+import java.util.ArrayList;
+import java.util.List;
 
 @Entity
 public class Laptop {
     @Id
     private int lid;
     private String lname;
-    @ManyToOne
-    private Student student;
+    @ManyToMany
+    private List<Student> listOfStudent = new ArrayList<>();
 
     public Laptop(int lid, String lname) {
         this.lid = lid;
         this.lname = lname;
     }
 
-    public Laptop(int lid, String lname, Student student){
+    public Laptop(int lid, String lname, List<Student> listOfStudent){
         this(lid,lname);
-        this.student = student;
+        this.listOfStudent = listOfStudent;
     }
 
     public int getLid() {
@@ -38,12 +41,12 @@ public class Laptop {
         this.lname = lname;
     }
 
-    public Student getStudent() {
-        return student;
+    public List<Student> getListOfStudent() {
+        return listOfStudent;
     }
 
-    public void setStudent(Student student) {
-        this.student = student;
+    public void setListOfStudent(List<Student> listOfStudent) {
+        this.listOfStudent = listOfStudent;
     }
 
     @Override
@@ -51,7 +54,7 @@ public class Laptop {
         return "Laptop{" +
                 "lid=" + lid +
                 ", lname='" + lname + '\'' +
-                ", student=" + student +
+                ", listOfStudent=" + listOfStudent +
                 '}';
     }
 }

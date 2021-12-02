@@ -1,9 +1,6 @@
 package model.relationship;
 
-import javax.persistence.Entity;
-import javax.persistence.Id;
-import javax.persistence.OneToMany;
-import javax.persistence.OneToOne;
+import javax.persistence.*;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -13,7 +10,7 @@ public class Student {
    private int roll;
    private String name;
    private int marks;
-   @OneToMany(mappedBy = "student")
+   @ManyToMany(mappedBy = "listOfStudent")
    private List<Laptop> listOfLaptop = new ArrayList<Laptop>();
 
 

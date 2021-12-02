@@ -16,19 +16,34 @@ import java.util.List;
 public class App {
     public static void main(String[] args) {
 
-        Student student = new Student(103,"Soumadip Dey",100);
-        Laptop laptop1 = new Laptop(111,"Dell",student);
+        Student student1 = new Student(101,"Soumadip Dey",100);
+        Student student2 = new Student(102,"Soumik Nandi",95);
+        Student student3 = new Student(103,"Anirban Dey",100);
+        Student student4 = new Student(104,"Arijit Das",100);
+
+        Laptop laptop1 = new Laptop(111,"Dell");
         Laptop laptop2 = new Laptop(112,"Hp");
-        Laptop laptop3 = new Laptop(113,"MacBook",student);
-        Laptop laptop4 = new Laptop(114,"Sony",student);
+        Laptop laptop3 = new Laptop(113,"MacBook");
+        Laptop laptop4 = new Laptop(114,"Sony");
         Laptop laptop5 = new Laptop(115,"Microsoft Surface");
 
         List<Laptop> listOfLaptop = new ArrayList<>();
         listOfLaptop.add(laptop1);
         listOfLaptop.add(laptop3);
         listOfLaptop.add(laptop4);
-        student.setListOfLaptop(listOfLaptop);
 
+        student1.setListOfLaptop(listOfLaptop);
+        student2.setListOfLaptop(listOfLaptop);
+        student3.setListOfLaptop(listOfLaptop);
+
+        List<Student> listOfStudent = new ArrayList<>();
+        listOfStudent.add(student1);
+        listOfStudent.add(student2);
+        listOfStudent.add(student3);
+
+        laptop1.setListOfStudent(listOfStudent);
+        laptop3.setListOfStudent(listOfStudent);
+        laptop4.setListOfStudent(listOfStudent);
 
         Configuration configuration = new Configuration().configure("hibernate.cfg.xml").addAnnotatedClass(Laptop.class).addAnnotatedClass(Student.class);
         ServiceRegistry registry = new ServiceRegistryBuilder().applySettings(configuration.getProperties()).buildServiceRegistry();
@@ -37,7 +52,11 @@ public class App {
         Transaction transaction = session.beginTransaction();
 
 
-        session.save(student);
+        session.save(student1);
+        session.save(student2);
+        session.save(student3);
+        session.save(student4);
+        
         session.save(laptop1);
         session.save(laptop2);
         session.save(laptop3);
