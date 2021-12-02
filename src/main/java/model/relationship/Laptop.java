@@ -2,16 +2,24 @@ package model.relationship;
 
 import javax.persistence.Entity;
 import javax.persistence.Id;
+import javax.persistence.ManyToOne;
 
 @Entity
 public class Laptop {
     @Id
     private int lid;
     private String lname;
+    @ManyToOne
+    private Student student;
 
     public Laptop(int lid, String lname) {
         this.lid = lid;
         this.lname = lname;
+    }
+
+    public Laptop(int lid, String lname, Student student){
+        this(lid,lname);
+        this.student = student;
     }
 
     public int getLid() {
@@ -30,11 +38,20 @@ public class Laptop {
         this.lname = lname;
     }
 
+    public Student getStudent() {
+        return student;
+    }
+
+    public void setStudent(Student student) {
+        this.student = student;
+    }
+
     @Override
     public String toString() {
-        return "Student{" +
+        return "Laptop{" +
                 "lid=" + lid +
                 ", lname='" + lname + '\'' +
+                ", student=" + student +
                 '}';
     }
 }

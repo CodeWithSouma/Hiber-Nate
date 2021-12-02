@@ -2,7 +2,10 @@ package model.relationship;
 
 import javax.persistence.Entity;
 import javax.persistence.Id;
+import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
+import java.util.ArrayList;
+import java.util.List;
 
 @Entity
 public class Student {
@@ -10,8 +13,8 @@ public class Student {
    private int roll;
    private String name;
    private int marks;
-   @OneToOne
-   private Laptop laptop;
+   @OneToMany(mappedBy = "student")
+   private List<Laptop> listOfLaptop = new ArrayList<Laptop>();
 
 
     public Student(int roll, String name, int marks) {
@@ -19,9 +22,10 @@ public class Student {
         this.name = name;
         this.marks = marks;
     }
-    public Student(int roll, String name, int marks, Laptop laptop) {
+
+    public Student(int roll, String name, int marks, List<Laptop> listOfLaptop) {
         this(roll, name, marks);
-        this.laptop = laptop;
+        this.listOfLaptop = listOfLaptop;
     }
 
     public int getRoll() {
@@ -48,12 +52,12 @@ public class Student {
         this.marks = marks;
     }
 
-    public Laptop getLaptop() {
-        return laptop;
+    public List<Laptop> getListOfLaptop() {
+        return listOfLaptop;
     }
 
-    public void setLaptop(Laptop laptop) {
-        this.laptop = laptop;
+    public void setListOfLaptop(List<Laptop> listOfLaptop) {
+        this.listOfLaptop = listOfLaptop;
     }
 
     @Override
@@ -62,7 +66,7 @@ public class Student {
                 "roll=" + roll +
                 ", name='" + name + '\'' +
                 ", marks=" + marks +
-                ", laptop=" + laptop +
+                ", listOfLaptop=" + listOfLaptop +
                 '}';
     }
 }
