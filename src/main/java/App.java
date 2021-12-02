@@ -12,8 +12,8 @@ import org.hibernate.service.ServiceRegistryBuilder;
 
 public class App {
     public static void main(String[] args) {
-        Student student = new Student(101,"Soumadip Dey",95);
         Laptop laptop = new Laptop(111,"Dell");
+        Student student = new Student(102,"Supratik Dey",95,laptop);
 
         Configuration configuration = new Configuration().configure("hibernate.cfg.xml").addAnnotatedClass(Laptop.class).addAnnotatedClass(Student.class);
         ServiceRegistry registry = new ServiceRegistryBuilder().applySettings(configuration.getProperties()).buildServiceRegistry();
@@ -22,7 +22,7 @@ public class App {
         Transaction transaction = session.beginTransaction();
 
         session.save(student);
-        session.save(laptop);
+       // session.save(laptop);
 
         transaction.commit();
 
