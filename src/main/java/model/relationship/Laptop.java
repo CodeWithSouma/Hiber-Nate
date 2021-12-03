@@ -1,28 +1,34 @@
 package model.relationship;
 
+import model.Alien;
+
 import javax.persistence.Entity;
 import javax.persistence.Id;
-import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
-import java.util.ArrayList;
-import java.util.List;
 
 @Entity
 public class Laptop {
     @Id
     private int lid;
     private String lname;
-    @ManyToMany
-    private List<Student> listOfStudent = new ArrayList<>();
+    private int price;
+    @ManyToOne
+    private Alien alien;
 
-    public Laptop(int lid, String lname) {
-        this.lid = lid;
-        this.lname = lname;
+    public Laptop() {
     }
 
-    public Laptop(int lid, String lname, List<Student> listOfStudent){
-        this(lid,lname);
-        this.listOfStudent = listOfStudent;
+    public Laptop(int lid, String lname, int price) {
+        this.lid = lid;
+        this.lname = lname;
+        this.price = price;
+    }
+
+    public Laptop(int lid, String lname, int price, Alien alien) {
+        this.lid = lid;
+        this.lname = lname;
+        this.price = price;
+        this.alien = alien;
     }
 
     public int getLid() {
@@ -41,20 +47,20 @@ public class Laptop {
         this.lname = lname;
     }
 
-    public List<Student> getListOfStudent() {
-        return listOfStudent;
+    public Alien getAlien() {
+        return alien;
     }
 
-    public void setListOfStudent(List<Student> listOfStudent) {
-        this.listOfStudent = listOfStudent;
+    public void setAlien(Alien alien) {
+        this.alien = alien;
     }
 
-    @Override
-    public String toString() {
-        return "Laptop{" +
-                "lid=" + lid +
-                ", lname='" + lname + '\'' +
-                ", listOfStudent=" + listOfStudent +
-                '}';
+    public int getPrice() {
+        return price;
     }
+
+    public void setPrice(int price) {
+        this.price = price;
+    }
+
 }
