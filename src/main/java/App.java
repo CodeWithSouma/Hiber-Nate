@@ -1,5 +1,6 @@
 import model.Alien;
 import model.relationship.Laptop;
+import org.hibernate.Query;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.Transaction;
@@ -42,8 +43,8 @@ public class App {
         SessionFactory sessionFactory = configuration.buildSessionFactory(registry);
         Session session1 =  sessionFactory.openSession();
         Transaction transaction1 = session1.beginTransaction();
-
-
+        Query query1 = session1.createQuery("from Alien where aid=101");
+        query1.setCacheable(true);
         /*session1.save(laptop1);
         session1.save(laptop2);
         session1.save(laptop3);
@@ -54,14 +55,18 @@ public class App {
         session1.save(alien2);
         session1.save(alien3);*/
 
-        Alien alien = (Alien) session1.get(Alien.class,101);
+//        Alien alien = (Alien) session1.get(Alien.class,101);
+        Alien alien = (Alien) query1.uniqueResult();
         System.out.println(alien.getAname());
         transaction1.commit();
         session1.close();
 
         Session session2 = sessionFactory.openSession();
         Transaction transaction2 = session2.beginTransaction();
-        alien = (Alien) session2.get(Alien.class,101);
+        Query query2 = session2.createQuery("from Alien where aid=101");
+        query2.setCacheable(true);
+//        alien = (Alien) session2.get(Alien.class,101);
+        alien = (Alien) query2.uniqueResult();
         System.out.println(alien.getAname());
         transaction2.commit();
         session2.close();
