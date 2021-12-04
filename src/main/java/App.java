@@ -40,22 +40,35 @@ public class App {
         Configuration configuration = new Configuration().configure("hibernate.cfg.xml").addAnnotatedClass(Laptop.class).addAnnotatedClass(Alien.class);
         ServiceRegistry registry = new ServiceRegistryBuilder().applySettings(configuration.getProperties()).buildServiceRegistry();
         SessionFactory sessionFactory = configuration.buildSessionFactory(registry);
-        Session session =  sessionFactory.openSession();
-        Transaction transaction = session.beginTransaction();
+        Session session1 =  sessionFactory.openSession();
+        Transaction transaction1 = session1.beginTransaction();
 
 
-        /*session.save(laptop1);
-        session.save(laptop2);
-        session.save(laptop3);
-        session.save(laptop4);
-        session.save(laptop5);
+        /*session1.save(laptop1);
+        session1.save(laptop2);
+        session1.save(laptop3);
+        session1.save(laptop4);
+        session1.save(laptop5);
 
-        session.save(alien1);
-        session.save(alien2);
-        session.save(alien3);*/
+        session1.save(alien1);
+        session1.save(alien2);
+        session1.save(alien3);*/
 
-        Alien alien = (Alien) session.get(Alien.class,101);
-        transaction.commit();
+        Alien alien = (Alien) session1.get(Alien.class,101);
+        System.out.println(alien.getAname());
+        transaction1.commit();
+        session1.close();
+
+        Session session2 = sessionFactory.openSession();
+        Transaction transaction2 = session2.beginTransaction();
+        alien = (Alien) session2.get(Alien.class,101);
+        System.out.println(alien.getAname());
+        transaction2.commit();
+        session2.close();
+
+
+
+
 
     }
 }

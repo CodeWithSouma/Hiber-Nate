@@ -1,15 +1,19 @@
 package model;
 
 import model.relationship.Laptop;
+import org.hibernate.annotations.CacheConcurrencyStrategy;
 
 import javax.persistence.*;
 import java.util.List;
 
 @Entity
+@Cacheable
+@org.hibernate.annotations.Cache(usage = CacheConcurrencyStrategy.READ_ONLY)
 public class Alien { //POJO
     @Id
     private int aid;
     private String aname;
+    @org.hibernate.annotations.Cache(usage = CacheConcurrencyStrategy.READ_WRITE)
     @OneToMany(mappedBy = "alien",fetch = FetchType.EAGER)
     private List<Laptop> listOfLaptop;
 
